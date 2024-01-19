@@ -1,10 +1,14 @@
 package com.Jhonnatan.superheropedia
 
+import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.Jhonnatan.superheropedia.databinding.ActivitySuperHeropedialistBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,9 +18,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
+
 class SuperHeropediaListActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySuperHeropedialistBinding
     private lateinit var retrofit: Retrofit
+    private lateinit var superheroAdapter:SuperHeroAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivitySuperHeropedialistBinding.inflate(layoutInflater)
@@ -38,6 +44,12 @@ class SuperHeropediaListActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean =false
         })
+
+        superheroAdapter= SuperHeroAdapter(){SuperHeroID->navigateToDetail(SuperHeroID)}
+        binding.rvSuperHero.setHasFixedSize(true)
+        binding.rvSuperHero.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        binding.rvSuperHero.adapter=superheroAdapter
+
     }
 
     private fun searchByname(query: String) {
@@ -50,13 +62,16 @@ class SuperHeropediaListActivity : AppCompatActivity() {
                                                             .getSuperHeroes(query)
             if(myResponse.isSuccessful){
                 //En el hilo principal
-                runOnUiThread {
-                    binding.ProgressBar.isVisible=false
-                }
+
                 //en el body esta la respuesta
                 val response: SuperHeroDataResponse? =myResponse.body()
 
                 if(response!=null){
+                    runOnUiThread {
+                        superheroAdapter.updateList(response.superhero)
+                        binding.ProgressBar.isVisible=false
+
+                    }
                     Log.i("Jhon", response.toString())
                 }
             }else{
@@ -73,4 +88,12 @@ class SuperHeropediaListActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    private fun navigateToDetail(id:String){
+        val intent=Intent(this,DetailSuperHeroActivity::class.java)
+        intent.putExtra(DetailSuperHeroActivity.EXTRA_ID,id)
+        startActivity(intent)
+    }
+
+
 }

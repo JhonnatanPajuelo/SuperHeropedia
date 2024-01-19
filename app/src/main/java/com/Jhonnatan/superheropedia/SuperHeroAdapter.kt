@@ -1,20 +1,28 @@
 package com.Jhonnatan.superheropedia
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class SuperHeroAdapter(var superListadoList:List<SuperHeroItemReponse> = emptyList()):RecyclerView.Adapter<SuperHeroViewHolder>() {
+class SuperHeroAdapter(var superListadoList:List<SuperHeroItemReponse> = emptyList(),
+    private val onItemSelected:(String)->Unit
+    ):RecyclerView.Adapter<SuperHeroViewHolder>() {
 
-
+    fun updateList(superListadoList: List<SuperHeroItemReponse>){
+        this.superListadoList=superListadoList
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperHeroViewHolder {
-        TODO("Not yet implemented")
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_superhero,parent,false)
+        return SuperHeroViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return superListadoList.size
     }
 
     override fun onBindViewHolder(holder: SuperHeroViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(superListadoList[position],onItemSelected)
+
     }
 }
