@@ -1,4 +1,4 @@
-Creating Proyect in Android Studio
+Creating Project in Android Studio
 
 ### In progress....
 ![image](https://github.com/JhonnatanPajuelo/SuperHeropedia/assets/83382553/f9e2211c-7f1c-4570-8a80-82c5ac36758c)
