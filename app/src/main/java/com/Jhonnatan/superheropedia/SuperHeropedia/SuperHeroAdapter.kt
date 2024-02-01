@@ -1,11 +1,12 @@
-package com.Jhonnatan.superheropedia
+package com.Jhonnatan.superheropedia.SuperHeropedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.Jhonnatan.superheropedia.R
 
 class SuperHeroAdapter(var superListadoList:List<SuperHeroItemReponse> = emptyList(),
-    private val onItemSelected:(String)->Unit
+                       private val onItemSelected:(String)->Unit
     ):RecyclerView.Adapter<SuperHeroViewHolder>() {
 
     fun updateList(superListadoList: List<SuperHeroItemReponse>){

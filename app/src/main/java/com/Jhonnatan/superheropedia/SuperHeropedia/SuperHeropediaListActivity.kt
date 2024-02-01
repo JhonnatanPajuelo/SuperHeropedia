@@ -1,4 +1,4 @@
-package com.Jhonnatan.superheropedia
+package com.Jhonnatan.superheropedia.SuperHeropedia
 
 import android.content.Intent
 
@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.Jhonnatan.superheropedia.databinding.ActivitySuperHeropedialistBinding
+import com.Jhonnatan.superheropedia.settings.SettingsActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,17 +23,24 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SuperHeropediaListActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySuperHeropedialistBinding
     private lateinit var retrofit: Retrofit
-    private lateinit var superheroAdapter:SuperHeroAdapter
+    private lateinit var superheroAdapter: SuperHeroAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivitySuperHeropedialistBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //Asignamos a la variable retrofit un objeto RetroFit
+
         retrofit=getRetrofit()
         initUI()
     }
 
     private fun initUI() {
+        binding.btnSettings.setOnClickListener {
+            val intent=Intent(this, SettingsActivity::class.java)
+
+            startActivity(intent)
+
+        }
          //Cuando en el SearchView ya hayamos escrito y queremos enviar
         binding.svSuperHero.setOnQueryTextListener(object :SearchView.OnQueryTextListener
         {
@@ -90,7 +98,7 @@ class SuperHeropediaListActivity : AppCompatActivity() {
     }
 
     private fun navigateToDetail(id:String){
-        val intent=Intent(this,DetailSuperHeroActivity::class.java)
+        val intent=Intent(this, DetailSuperHeroActivity::class.java)
         intent.putExtra(DetailSuperHeroActivity.EXTRA_ID,id)
         startActivity(intent)
     }

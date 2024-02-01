@@ -1,11 +1,11 @@
-package com.Jhonnatan.superheropedia
+package com.Jhonnatan.superheropedia.SuperHeropedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
 import com.Jhonnatan.superheropedia.databinding.ActivityDetailSuperHeroBinding
-import com.Jhonnatan.superheropedia.databinding.ActivitySuperHeropedialistBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import kotlin.math.roundToInt
 
 class DetailSuperHeroActivity : AppCompatActivity() {
@@ -46,10 +45,20 @@ class DetailSuperHeroActivity : AppCompatActivity() {
 
     private fun createUI(superHero: SuperHeroDetailResponse) {
         Picasso.get().load(superHero.image.url).into(binding.IvSuperHero);
-        binding.tvNameHero.text=superHero.superHeroName
+        //binding.tvNameHero.text=superHero.superHeroName
+        //binding.tvFullName.text=superHero.biografy.fullName
+        //binding.tvPubliser.text=superHero.biografy.publiser
+        //Fun
 
+        updateBinding(binding.tvNameHero,superHero.superHeroName)
+        updateBinding(binding.tvFullName,superHero.biografy.fullName)
+        updateBinding(binding.tvPubliser,superHero.biografy.publiser)
         preparateStats(superHero.superHeroPower)
 
+    }
+
+    private fun updateBinding(texView: TextView,string:String){
+        texView.text=string
     }
 
     private fun preparateStats(superHeroPower: PowerStatsResponse) {

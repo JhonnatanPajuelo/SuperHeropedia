@@ -1,4 +1,4 @@
-package com.Jhonnatan.superheropedia
+package com.Jhonnatan.superheropedia.SuperHeropedia
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,7 +11,7 @@ data class SuperHeroDataResponse(
 data class SuperHeroItemReponse(
     @SerializedName("id") val SuperHeroId: String,
     @SerializedName("name") val SuperHeroName: String,
-    @SerializedName("image") val imageSuperHero:SuperHeroImageResponse
+    @SerializedName("image") val imageSuperHero: SuperHeroImageResponse
 )
 
 data class SuperHeroImageResponse(@SerializedName("url") val url: String)

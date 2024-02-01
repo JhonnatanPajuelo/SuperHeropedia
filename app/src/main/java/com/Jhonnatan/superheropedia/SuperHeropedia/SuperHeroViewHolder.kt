@@ -1,4 +1,4 @@
-package com.Jhonnatan.superheropedia
+package com.Jhonnatan.superheropedia.SuperHeropedia
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

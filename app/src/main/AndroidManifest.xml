@@ -16,10 +16,13 @@
         android:theme="@style/Theme.SuperHeropedia"
         tools:targetApi="31">
         <activity
-            android:name=".DetailSuperHeroActivity"
+            android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".SuperHeropediaListActivity"
+            android:name=".SuperHeropedia.DetailSuperHeroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuperHeropedia.SuperHeropediaListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
